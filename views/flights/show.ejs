@@ -1,0 +1,46 @@
+<%- include('../partials/header') %>
+
+<section id="show-page">
+    <div>Airline: </div>
+    <div><%= flight.airline %></div>
+    <div>Airport: </div>
+    <div><%= flight.airport %></div>
+    <div>Flight Number: </div>
+    <div><%= flight.flightNo %></div>
+    <div>Date: </div>
+    <div><%= flight.departs %></div>
+  </section>
+  <br><br><h2>Arrivals</h2>
+<form method="POST"
+  action="/flights/<%= flight._id %>/arrivals">
+  <label>Arrival Airport</label>
+  <select name="arrivalAirport">
+    <option value="AUS">AUS</option>
+    <option value="DFW">DFW</option>
+    <option value="DEN">DEN</option>
+    <option value="LAX">LAX</option>
+    <option value="SAN">SAN</option>
+</select>
+  <label>Arrival Date:</label>
+  <input type="datetime-local" name="arrival">
+  <input type="submit" required>
+</form>
+
+<table>
+<thead>
+    <tr>
+    <th>Arrival Airport</th>
+    <th>Arrival Date</th>
+    </tr>
+</thead>
+<tbody>
+    <% flight.arrivals.forEach(function(a) { %>
+    <tr>
+        <td><%= a.arrivalAirport %></td>
+        <td><%= a.arrival.toLocaleDateString() %></td>
+    </tr>
+    <% }); %>
+</tbody>
+</table>
+
+<%- include('../partials/footer') %>
